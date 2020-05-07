@@ -1,48 +1,43 @@
 <?php
-    $actual = explode("/", $_SERVER['PHP_SELF'])[2];
+    $actual = $_SERVER['PHP_SELF'];
 ?>
 <div class="clearfix header">
                 <nav>
                     <ul class="float-right nav nav-pills">
                         <li class="nav-item">
-                            <?php if ($actual == "index.php"){ ?>
+                            <?php if ($actual == "/index.php"){ ?>
                             <a class="active nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                             <?php } else { ?>
                                 <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                             <?php } ?>
                         </li>
                         <li class="nav-item">
-                            <?php if ($actual == "about.php") {  ?>
+                            <?php if ($actual == "/about.php") {  ?>
                             <a class="active nav-link" href="about.php">About</a>
                             <?php } else { ?>
                                 <a class="nav-link" href="about.php">About</a>
                             <?php } ?>
                         </li>
                         <li class="nav-item">
-                            <?php if ($actual == "projects.php") { ?>
+                            <?php if ($actual == "/projects.php") { ?>
                             <a class="active nav-link" href="projects.php">Projects</a>
                             <?php } else { ?>
                                 <a class="nav-link" href="projects.php">Projects</a>
                             <?php } ?>
                         </li>
                         <li class="nav-item">
-                            <?php if ($actual == "news.php") { ?>
+                            <?php if ($actual == "/news.php") { ?>
                             <a class="active nav-link" href="news.php">News</a>
                             <?php } else { ?>
                             <a class="nav-link" href="news.php">News</a>
                             <?php } ?>
                         </li>
                         <li class="nav-item">
-                            <?php if ($actual == "contact.php") { ?>
+                            <?php if ($actual == "/contact.php") { ?>
                             <a class="active nav-link" href="contact.php">Contact</a>
                             <?php } else { ?>
                                 <a class="nav-link" href="contact.php">Contact</a>
                             <?php } ?>
-                        </li>
-                        <li class ="nav-item">
-                        <a class = "nav-link">
-                                <?= $_SERVER['PHP_SELF'] ?>
-                        </a>
                         </li>
                     </ul>
                 </nav>
