@@ -39,6 +39,11 @@
                                 <a class="nav-link" href="contact.php">Contact</a>
                             <?php } ?>
                         </li>
+                        <li class ="nav-item">
+                        <a class = "nav-link">
+                                <?= $_SERVER['PHP_SELF'] ?>
+                        </a>
+                        </li>
                     </ul>
                 </nav>
 
