@@ -43,9 +43,6 @@
                     <div class="card-body"> 
                         <a href = "project.php?pro=<?= $value->id ?>"><h4 class="card-title"><?= $value->title ?></h4></a> 
                         <p class="card-text"><?= $value->short_description ?></p> 
-                        <p> <?= $imgType ?> </p>
-                        <p> <?= $imgUrl ?> </p>
-                        <p> <?= $imgData ?> </p>
                     </div>                     
                     <div class="card-footer"> 
                         <small class="text-muted"><span class = "glyphicon glyphicon-calendar"></span><?= $date ?></small> 
