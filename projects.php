@@ -33,15 +33,20 @@
                     if ($value->image != null) {
                         $imgUrl = $api.$value->image->url;
                     }
+                    $imgType = explode(".", $imgUrl)[1];
+                    $imgData = "data:image/".$imgType.";base64,".base64_encode(file_get_contents($imgUrl));
+                    $date = DateTime::createFromFormat('Y-m-j', $value->startDate);
+                    $date = $date->format("F Y");
                 ?>
                 <div class="card"> 
-                    <img class="card-img-top" src="<?= $imgUrl ?>" alt="Card image cap"> 
+                    <img class="card-img-top" src="<?= $imgData ?>" alt="Card image cap"> 
                     <div class="card-body"> 
-                        <h4 class="card-title"><?= $value->title ?></h4> 
-                        <p class="card-text"><?= $value->description ?></p> 
+                        <a href = "project.php?pro=<?= $value->id ?>"><h4 class="card-title"><?= $value->title ?></h4></a> 
+                        <p class="card-text"><?= $value->short_description ?></p> 
                     </div>                     
                     <div class="card-footer"> 
-                        <small class="text-muted"><?= $value->startDate ?></small> 
+                        <small class="text-muted"><span class = "glyphicon glyphicon-calendar"></span><?= $date ?></small> 
+                        <small class="text-muted"><span class = "glyphicon glyphicon-folder-open"></span><?= $value->Type ?></small>
                     </div>                     
                 </div>  
 

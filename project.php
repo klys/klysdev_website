@@ -1,3 +1,27 @@
+<?php
+    // validatin and curating id
+    if (!isset($_GET["pro"])) { // first check that is set at all
+        header("location: projects.php");
+    }
+
+    if (!is_numeric($_GET["pro"])) { // later check if is a number
+        header("location: projects.php");
+    }
+
+    // later to check is if we got any value from the api
+
+    include_once("settings.php");
+    $url = "{$api}/projects/".$_GET["pro"];
+    $data = json_decode(file_get_contents($url));
+?>
+
+
+<?php 
+    // date manipulation
+    //$date = $data->startDate;
+    $date = DateTime::createFromFormat('Y-m-j', $data->startDate);
+    $date = $date->format("F Y");
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,7 +30,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Nova Project @ #klysDev</title>
+        <title><?= $data->title ?> @ Projects #klysDev</title>
         <!-- Bootstrap core CSS -->
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
@@ -14,36 +38,25 @@
     </head>
     <body>
         <div class="container">
-            <div class="clearfix header">
-                <nav>
-                    <ul class="float-right nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="active nav-link" href="#">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-                <h3 class="text-muted">@klysDev</h3>
-            </div>
+
+            <?php include("navbar.php"); ?>
+
             <div class="jumbotron">
-                <h1 class="display-3">Nova</h1>
-                <p class="lead">Online real time action game</p>
+                <p style = "float:right;display:block;"><?= $date ?></p>
+                <p class="lead"></p>
+                <h1 class="display-3"><?= $data->title ?></h1>
+                <p class="lead"><?= $data->description ?></p>
+
+            <?php if ($data->website != null) { ?>
                 <p class="lead"></p>
                 <p class="lead">wanna give a try?</p>
-                <p><a class="btn btn-lg btn-success" href="#" role="button">Check out more</a></p>
+                <p><a class="btn btn-lg btn-success" href="<?= $data->website ?>" role="button">Check out more</a></p>
+            <?php } ?>
+                <p><?= var_dump($data) ?></p>
             </div>
+
             <h3>Gallery of Project</h3>
+
             <div class="card-group">
                 <div class="card"> 
                     <img class="card-img-top" src="http://pinegrow.com/placeholders/img12.jpg" alt="Card image cap"> 
@@ -78,27 +91,29 @@
                 
             </div>
             <h3>Techonolgies involved in this project:</h3>
+
             <div class="marketing row">
                 <div class="col-lg-6">
-                    <h4>React</h4>
-                    <p>A new way to develop on react with a more lineal advance method.</p>
-                    <h4>Socket.IO</h4>
-                    <p>It may be php, or python, or go, in this topic we talk about our review and experience in server software developing</p>
-                    <h4>Blender</h4>
-                    <p>Is really the fear so powerfull when moving crows for market motivation, the numbers talk by itself...</p>
+            <?php 
+                $techs = $data->technologies;
+                $n = 0;
+                foreach($techs as $key => $value) {
+                    $n++;
+            ?>
+                <h4><?= $value->title ?></h4>
+                <p><?= $value->description ?></p>
+
+                <?php 
+                if ($n >= 3) { 
+                    $n = 0;
+                    ?>
                 </div>
                 <div class="col-lg-6">
-                    <h4>Node JS</h4>
-                    <p>Nova is a real time action game where you are part of a galactic spaceship team fighting against another team for destroying the headquarter to win.</p>
-                    <h4>Game Maker Studio 1</h4>
-                    <p>A mobile game to avoid obstacles</p>
-                    <h4>Electron</h4>
-                    <p>A war game web based for nation administration to war managing</p>
+                <?php }
+                } // end of foreach ?>
                 </div>
             </div>
-            <footer class="footer">
-                <p>&copy; klysDev 2020 | Surviving covid19 and alien invansions</p>
-            </footer>
+            <?php include("footer.php"); ?>
         </div>         
         <!-- /container -->
         <!-- Bootstrap core JavaScript
