@@ -60,7 +60,7 @@
                 $n = 0;    
             }    
                 
-                    } ?>
+                    } // end of foreach ?>
             </div>
             <?php include("footer.php"); ?>
         </div>         

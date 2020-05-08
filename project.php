@@ -45,50 +45,59 @@
                 <p style = "float:right;display:block;"><?= $date ?></p>
                 <p class="lead"></p>
                 <h1 class="display-3"><?= $data->title ?></h1>
-                <p class="lead"><?= $data->description ?></p>
 
             <?php if ($data->website != null) { ?>
                 <p class="lead"></p>
                 <p class="lead">wanna give a try?</p>
                 <p><a class="btn btn-lg btn-success" href="<?= $data->website ?>" role="button">Check out more</a></p>
             <?php } ?>
-                <p><?= var_dump($data) ?></p>
             </div>
+
+            <p id = "content-location"><?= $data->description ?></p>
 
             <h3>Gallery of Project</h3>
 
             <div class="card-group">
+            <?php 
+                $f = 0;
+                $n = 0;
+                foreach ($data->galleries as $key => $value) { 
+                $n++;    
+                $f++;
+                    $imgUrl = "imgs/noimage.png";
+                    if ($value->picture != null) {
+                        $imgUrl = $api.$value->picture->url;
+                    }
+                    $imgType = explode(".", $imgUrl)[1];
+                    $imgData = "data:image/".$imgType.";base64,".base64_encode(file_get_contents($imgUrl));
+                    
+                ?>
                 <div class="card"> 
-                    <img class="card-img-top" src="http://pinegrow.com/placeholders/img12.jpg" alt="Card image cap"> 
+                    <img class="card-img-top" src="<?= $imgData ?>" alt="Card image cap"> 
                     <div class="card-body"> 
-                        <h4 class="card-title">3ds spaceships</h4> 
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> 
+                        <p class="card-text"><?= $value->description ?></p> 
                     </div>                     
-                    <div class="card-footer"> 
-                        <small class="text-muted">Last updated 3 mins ago</small> 
-                    </div>                     
-                </div>                 
-                <div class="card"> 
-                    <img class="card-img-top" src="http://pinegrow.com/placeholders/img12.jpg" alt="Card image cap"> 
-                    <div class="card-body"> 
-                        <h4 class="card-title">Online experience</h4> 
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p> 
-                    </div>                     
-                    <div class="card-footer"> 
-                        <small class="text-muted">Last updated 3 mins ago</small> 
-                    </div>                     
-                </div>                 
-                <div class="card"> 
-                    <img class="card-img-top" src="http://pinegrow.com/placeholders/img15.jpg" alt="Card image cap"> 
-                    <div class="card-body"> 
-                        <h4 class="card-title">Full action in real time</h4> 
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p> 
-                    </div>                     
-                    <div class="card-footer"> 
-                        <small class="text-muted">Last updated 3 mins ago</small> 
-                    </div>                     
+                                      
+                </div>  
+
+
+
+            <?php if ($n >= 3) { ?>
                 </div>
+                <div class="card-group">
+
+                <?php 
+                $n = 0;    
+            }    
                 
+                    } // end of foreach 
+                    
+                    // no files
+                    if ($f == 0) { ?>
+                        <p>No images added to this gallery yet.</p>
+                    <?php }
+                    
+                    ?>
             </div>
             <h3>Techonolgies involved in this project:</h3>
 
@@ -113,6 +122,28 @@
                 } // end of foreach ?>
                 </div>
             </div>
+            <h3>Related Project Links</h3>
+            <ul> 
+                <?php 
+                    $f = 0;
+                    foreach ($data->links as $key => $value) { 
+                        $f++;
+                        ?>
+
+                    <li><a href = "<?= $value->URL ?>"> <?= $value->Name ?> </a>
+                    <?php if ($value->description != null) { ?>
+                        <ul>
+                            <li> <?= $value->description ?> </li>
+                        </ul>
+                    <?php } ?>
+                    </li>  
+                    
+                <?php } 
+                
+                if ($f == 0) { ?>
+                    <p> Not links added yet for this project. </p>
+                <?php } ?>               
+            </ul>
             <?php include("footer.php"); ?>
         </div>         
         <!-- /container -->
@@ -122,5 +153,11 @@
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/popper.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/showdown.min.js"></script>
+        <script>
+            var converter = new showdown.Converter();
+            var html = converter.makeHtml(<?= json_encode($data->description) ?>);
+            $("#content-location").html(html)
+        </script>
     </body>
 </html>
