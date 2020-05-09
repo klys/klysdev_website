@@ -25,16 +25,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <?php include('header.php'); ?>
+        <meta name="description" content="<?= $data->short_description ?>">
+        <meta name="author" content="Developer Team and Junior Jimenez">
         <title><?= $data->title ?> @ Projects #klysDev</title>
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="jumbotron-narrow.css" rel="stylesheet">
+        
     </head>
     <body>
         <div class="container">
@@ -99,7 +94,7 @@
                     
                     ?>
             </div>
-            <h3>Techonolgies involved in this project:</h3>
+            <h3>Technolgies involved in this project:</h3>
 
             <div class="marketing row">
                 <div class="col-lg-6">
@@ -122,7 +117,7 @@
                 } // end of foreach ?>
                 </div>
             </div>
-            <h3>Related Project Links</h3>
+            <h3>Links related to this project</h3>
             <ul> 
                 <?php 
                     $f = 0;
@@ -159,5 +154,33 @@
             var html = converter.makeHtml(<?= json_encode($data->description) ?>);
             $("#content-location").html(html)
         </script>
+
+
+         <script>
+             // Image to Modal
+             $(".card-img-top").click(function(){
+                 console.log("testing")
+                //console.log(this.src)
+                $("#image-viewer").attr("src", this.src);
+                $('#myModal').modal('show')
+
+             });
+         </script>
+
+
+        <!-- Modal for Images -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <img src= "" id = "image-viewer" width="100%">
+      </div>
+      
+    </div>
+  </div>
+</div>
     </body>
 </html>
