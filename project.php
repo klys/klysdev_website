@@ -94,7 +94,7 @@
                     
                     ?>
             </div>
-            <h3>Technolgies involved in this project:</h3>
+            <h3>Technologies involved in this project:</h3>
 
             <div class="marketing row">
                 <div class="col-lg-6">
