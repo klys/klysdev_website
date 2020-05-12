@@ -4,7 +4,7 @@
         header("location: projects404.php");
     }
 
-    if ((!is_numeric($_GET["pro"])) && (!is_string($_GET["slug"]))) { // later check if is a number
+    if (!is_string($_GET["slug"])) { // later check if is a number
         header("location: projects404.php");
     }
 
