@@ -1,11 +1,12 @@
 <?php
     // validatin and curating id
-    echo var_dump($_GET);
-    die();
+    
     if (!isset($_GET["slug"])) { // first check that is set at all
         header("location: projects404.php");
     }
 
+    echo var_dump($_GET);
+    die();
     // later to check is if we got any value from the api
 
     include_once("settings.php");
