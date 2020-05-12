@@ -5,7 +5,7 @@
         header("location: projects404.php");
     }
 
-    if (!is_string($_GET["slug"]) {
+    if (!is_string($_GET["slug"])) {
         header("location: projects404.php");
     }
 
