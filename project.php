@@ -13,9 +13,9 @@
     
     $data = json_decode(file_get_contents($url));
 
-    var_dump($url);
+    //var_dump($url);
     var_dump($data);
-    die();
+    //die();
 ?>
 
 
