@@ -1,10 +1,6 @@
 <?php
-    // if are both sets, 404
-    if ((isset($_GET["pro"])) && (isset($_GET["slug"]))) {
-        header("location: projects404.php");
-    }
     // validatin and curating id
-    if ((!isset($_GET["pro"])) && (!isset($_GET["slug"]))) { // first check that is set at all
+    if (!isset($_GET["slug"])) { // first check that is set at all
         header("location: projects404.php");
     }
 
@@ -15,12 +11,9 @@
     // later to check is if we got any value from the api
 
     include_once("settings.php");
-    if (isset($_GET["pro"])) {
-        $url = "{$api}/projects/".$_GET["pro"];
-    } 
-    if (isset($_GET["slug"])) {
-        $url ="{$api}/projects?slug=".$_GET["slug"];
-    } 
+
+    $url = "{$api}/projects?slug=".$_GET["slug"];
+    
     $data = json_decode(file_get_contents($url));
 ?>
 
