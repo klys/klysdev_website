@@ -36,7 +36,7 @@
                 <div class="card"> 
                     <img class="card-img-top" src="<?= $imgData ?>" alt="Card image cap"> 
                     <div class="card-body"> 
-                        <a href = "project.php?pro=<?= $value->id ?>"><h4 class="card-title"><?= $value->title ?></h4></a> 
+                        <a href = "/project/<?= $value->slug ?>"><h4 class="card-title"><?= $value->title ?></h4></a> 
                         <p class="card-text"><?= $value->short_description ?></p> 
                     </div>                     
                     <div class="card-footer"> 
