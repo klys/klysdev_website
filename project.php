@@ -5,8 +5,6 @@
         header("location: projects404.php");
     }
 
-    echo var_dump($_GET);
-    die();
     // later to check is if we got any value from the api
 
     include_once("settings.php");
@@ -14,6 +12,10 @@
     $url = "{$api}/projects?slug=".$_GET["slug"];
     
     $data = json_decode(file_get_contents($url));
+
+    var_dump($url);
+    var_dump($data);
+    die();
 ?>
 
 
