@@ -1,5 +1,7 @@
 <?php
     // validatin and curating id
+    echo var_dump($_GET);
+    die();
     if (!isset($_GET["slug"])) { // first check that is set at all
         header("location: projects404.php");
     }
