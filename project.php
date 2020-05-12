@@ -1,7 +1,11 @@
 <?php
-    // validatin and curating id
+    // validating and curating id
     
     if (!isset($_GET["slug"])) { // first check that is set at all
+        header("location: projects404.php");
+    }
+
+    if (!is_string($_GET["slug"]) {
         header("location: projects404.php");
     }
 
@@ -11,11 +15,8 @@
 
     $url = "{$api}/projects?slug=".$_GET["slug"];
     
-    $data = json_decode(file_get_contents($url));
+    $data = json_decode(file_get_contents($url))[0];
 
-    //var_dump($url);
-    var_dump($data);
-    //die();
 ?>
 
 
