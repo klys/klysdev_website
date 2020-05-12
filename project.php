@@ -4,10 +4,6 @@
         header("location: projects404.php");
     }
 
-    if (!is_string($_GET["slug"])) { // later check if is a number
-        header("location: projects404.php");
-    }
-
     // later to check is if we got any value from the api
 
     include_once("settings.php");
