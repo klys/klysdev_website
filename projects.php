@@ -59,12 +59,6 @@
             </div>
             <?php include("footer.php"); ?>
         </div>         
-        <!-- /container -->
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/popper.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <?php include_once("footer_js.php"); ?>
     </body>
 </html>

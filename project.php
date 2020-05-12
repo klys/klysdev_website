@@ -146,13 +146,9 @@
             <?php include("footer.php"); ?>
         </div>         
         <!-- /container -->
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/popper.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/showdown.min.js"></script>
+       
+        <?php include ("footer_js.php"); ?>
+        <script src="<?= $server ?>/assets/js/showdown.min.js"></script>
         <script>
             var converter = new showdown.Converter();
             var html = converter.makeHtml(<?= json_encode($data->description) ?>);
