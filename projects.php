@@ -11,6 +11,8 @@
         $url = "{$api}/projects?".$ordering;
     }
     $data = json_decode(file_get_contents($url));
+
+    $alltechs = json_decode(file_get_contents($api."/technologies"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +27,50 @@
         <div class="container">
             
         <?php include('navbar.php'); ?>
+
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="<?= $server ?>/projects" aria-controls="home" role="tab" data-toggle="tab">No-filters</a></li> | 
+            <li role="presentation"><a href="#by-type" aria-controls="profile" role="tab" data-toggle="tab">Filter by Type</a></li> | 
+            <li role="presentation"><a href="#by-tech" aria-controls="messages" role="tab" data-toggle="tab">Filter by Technology</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="no-filters"></div>
+            <div role="tabpanel" class="tab-pane" id="by-type">
+            <p> 
+            <a class = "btn btn-sm btn-success" href = "<?= $server ?>/project-type/WebApp">WebApp</a> 
+            <a class = "btn btn-sm btn-success" href = "<?= $server ?>/project-type/Website">Website</a> 
+            <a class = "btn btn-sm btn-success" href = "<?= $server ?>/project-type/Game">Game</a> 
+            <a class = "btn btn-sm btn-success" href = "<?= $server ?>/project-type/MobileApp">MobileApp</a> 
+            <a class = "btn btn-sm btn-success" href = "<?= $server ?>/project-type/Project">Project</a> 
+            <a class = "btn btn-sm btn-success" href = "<?= $server ?>/project-type/Project">DesktopApp</a> 
+            </p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="by-tech">
+            <?php 
+                    $repeated = [];
+                    $btns = ['danger', 'primary', 'warning', 'info', 'success'];
+                    $txclr = ['white', 'white', 'black', 'black', 'white'];
+                    $b = 0;
+                    foreach ($alltechs as $key => $value) { 
+                        if (in_array($value->title, $repeated) == false) { 
+                            // not repeated, so we add it and print then
+                            array_push($repeated, $value->title); ?>
+                            <a class = "btn btn-sm btn-<?= $btns[$b] ?>" style = 'color:<?= $txclr[$b] ?>;' href = "<?= $server ?>/project-technology/<?= urlencode($value->title) ?>"><?= $value->title ?></a>
+                        <?php
+                            
+                            $b++; // index counter
+                            if ($b >= count($btns)) $b = 0; // reset of index counter
+                            } // if
+                         } // foreach ?>
+            </div>
+            </div>
+
+            </div>
 
             <h3>Projects @ #klys</h3>
             
