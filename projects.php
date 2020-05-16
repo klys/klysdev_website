@@ -1,6 +1,15 @@
 <?php
     include_once("settings.php");
-    $url = "{$api}/projects?_sort=StartDate:DESC";
+    $ordering = "_sort=StartDate:DESC";
+    if (isset($_GET['tech'])) {
+        $url = "{$api}/projects?technologies.title=".urlencode($_GET['tech'])."&".$ordering;
+    }
+    if (isset($_GET['type'])) {
+        $url = "{$api}/projects?Type=".urlencode($_GET['type'])."&".$ordering;
+    }
+    if (!isset($url)) {
+        $url = "{$api}/projects?".$ordering;
+    }
     $data = json_decode(file_get_contents($url));
 ?>
 <!DOCTYPE html>
@@ -32,6 +41,16 @@
                     $imgData = "data:image/".$imgType.";base64,".base64_encode(file_get_contents($imgUrl));
                     $date = DateTime::createFromFormat('Y-m-j', $value->startDate);
                     $date = $date->format("F Y");
+
+                    $techs = "";
+                    $tech_count = 0;
+                    foreach($value->technologies as $k => $tech) {
+                        $tech_count++;
+                        $techs .= $tech->title;
+                        if ($tech_count < count($value->technologies)) {
+                            $techs .=", ";
+                        }
+                    }
                 ?>
                 <div class="card"> 
                     <img class="card-img-top" src="<?= $imgData ?>" alt="Card image cap"> 
@@ -40,8 +59,8 @@
                         <p class="card-text"><?= $value->short_description ?></p> 
                     </div>                     
                     <div class="card-footer"> 
-                        <small class="text-muted"><span class = "glyphicon glyphicon-calendar"></span><?= $date ?></small> 
-                        <small class="text-muted"><span class = "glyphicon glyphicon-folder-open"></span><?= $value->Type ?></small>
+                        <small class="text-muted"><?= $date ?></small> 
+                        <small class="text-muted"><a class = "btn btn-sm btn-danger" style="color:white;" data-toggle="tooltip" data-placement="top" title="<?= $techs ?>" href = "<?= $server ?>/project-type/<?= $value->Type ?>"><?= $value->Type ?></a></small>
                     </div>                     
                 </div>  
 
@@ -60,5 +79,10 @@
             <?php include("footer.php"); ?>
         </div>         
         <?php include_once("footer_js.php"); ?>
+        <script>
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        </script>
     </body>
 </html>

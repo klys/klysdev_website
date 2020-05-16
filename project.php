@@ -108,7 +108,7 @@
                 foreach($techs as $key => $value) {
                     $n++;
             ?>
-                <h4><?= $value->title ?></h4>
+                <h4><a href = "<?= $server ?>/project-technology/<?= urlencode($value->title) ?>"><?= $value->title ?></a></h4>
                 <p><?= $value->description ?></p>
 
                 <?php 
