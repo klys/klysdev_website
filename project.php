@@ -41,7 +41,7 @@
             <?php include("navbar.php"); ?>
 
             <div class="jumbotron">
-                <p style = "float:right;display:block;"><?= $date ?></p>
+                <p style = "float:center;display:block;"><?= $date ?></p>
                 <p class="lead"></p>
                 <h1 class="display-3"><?= $data->title ?></h1>
 

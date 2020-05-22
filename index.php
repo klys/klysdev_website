@@ -62,7 +62,7 @@
             <div class="media"> 
                 <img class="d-flex mr-3" src="<?= $imgData ?>" alt="Generic placeholder image" width="150"> 
                 <div class="media-body"> 
-                    <h5 class="mt-0"><a href = "project.php?pro=<?= $value->id ?>"><?= $value->title ?></a></h5>  
+                    <h5 class="mt-0"><a href = "project/<?= $value->slug ?>"><?= $value->title ?></a></h5>  
                     <?= $value->short_description ?>  
                     <p> 
                     <?php foreach($value->technologies as $k => $techs) { ?>
