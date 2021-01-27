@@ -1,0 +1,25 @@
+Options -MultiViews
+<IfModule mod_rewrite.c>
+  # Turn on URL rewriting
+  RewriteEngine On
+
+  # Installation directory
+  RewriteBase /
+
+  # Allow any files or directories that exist to be displayed directly
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # URL rewriter
+  RewriteRule ^home home.php
+  RewriteRule ^about about.php
+  RewriteRule ^projects projects.php
+  RewriteRule ^news news.php
+  RewriteRule ^contact contact.php
+  RewriteRule ^project/(.*)$ project.php?slug=$1
+  RewriteRule ^project-technology/(.*)$ projects.php?tech=$1
+  RewriteRule ^project-type/(.*)$ projects.php?type=$1
+  RewriteRule ^privacy-policy privacy.php
+  RewriteRule ^cookie-consent cookie_consent.php
+  
+</IfModule>
